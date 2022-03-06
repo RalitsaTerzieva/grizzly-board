@@ -1,4 +1,4 @@
-# GrizzlyBear
+# Grizzly Board
 This is a simple board that can help you easily organize you tasks. Actually, there are two separate apps. The Client which serves the front-end (using angular), and the API which is the back-end.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.
