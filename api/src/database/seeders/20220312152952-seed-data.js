@@ -110,32 +110,133 @@ module.exports = {
       const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
       const dates = ['2021-11-01', '2021-11-02', '2021-11-03', '2021-11-04', '2021-11-05', '2021-11-06', '2021-11-07', '2021-11-08', '2021-11-09', '2021-11-10', '2021-11-11', '2021-11-12', '2021-11-13', '2021-11-14', '2021-11-15', '2021-11-16', '2021-11-17', '2021-11-18', '2021-11-19', '2021-11-20', '2021-11-21', '2021-11-22', '2021-11-23', '2021-11-24', '2021-11-25', '2021-11-26', '2021-11-27', '2021-11-28', '2021-11-29', '2021-11-30' ]
       const randLorem = () => lorem.slice(randInt(0, 50), randInt(90, 150));
-      for(let i = 0; i < randInt(16, 29); i++) {
-        entries.push({
-          user_id: user.id,
-          date: new Date(dates[i]),
-          description: randLorem(),
-          topic: randLorem().slice(-25),
-          sleep: randInt(3, 9) + parseFloat(`0.${randInt(1, 100)}`),
-          wc: randInt(0,5),
-          weight: randInt(45, 51) + parseFloat(`0.${randInt(1, 100)}`),
-          symptoms: randLorem().slice(-50),
-          workout: !!randInt(0, 1),
-          breakfast: randLorem().slice(-60),
-          lunch: randLorem().slice(-60),
-          snack:  randLorem().slice(-60),
-          dinner:  randLorem().slice(-60),
+      let n = 1000 * i
+      const boardsList = [
+        {
+          id: user.id + n + 1,
+          name: 'Board 1',
+          goals: randLorem().slice(-25),
+          description: randLorem().slice(-25),
           createdAt: new Date(),
           updatedAt: new Date(),
-        });
+          user_id: user.id,
+          start_date: new Date(),
+          end_date: new Date(),
+        },
+        {
+          id: user.id + n + 2,
+          name: 'Board 2',
+          goals: randLorem().slice(-25),
+          description: randLorem().slice(-25),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          user_id: user.id,
+          start_date: new Date(),
+          end_date: new Date(),
+        },
+      ]
+      //console.log("creating boards")
+      let boards = await queryInterface.bulkInsert(
+        'Boards',
+        boardsList,
+        { returning: true }
+      );
+      //console.log(boards)
+      for (let b = 0; b < boardsList.length; b++) {
+        const board = boardsList[b];
+        const m = 100 * b
+        const columnsList = [
+          {
+            id: board.id + m + 1,
+            name: "TODO",
+            index: 0,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            board_id: board.id,
+            user_id: user.id,
+          },
+          {
+            id: board.id + m + 2,
+            name: "IN PROGRESS",
+            index: 1,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            board_id: board.id,
+            user_id: user.id,
+          },
+          {
+            id: board.id + m + 3,
+            name: "CODE REVIEW",
+            index: 2,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            board_id: board.id,
+            user_id: user.id,
+          },
+          {
+            id: board.id + m + 4,
+            name: "IN TEST",
+            index: 3,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            board_id: board.id,
+            user_id: user.id,
+          },
+          {
+            id: board.id + m + 5,
+            name: "DONE",
+            index: 4,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            board_id: board.id,
+            user_id: user.id,
+          },
+        ]
+        console.log('Creating columns')
+        console.log(columnsList)
+        let columns = await queryInterface.bulkInsert(
+          'Columns',
+          columnsList,
+          { returning: true }
+        );
+
+        // console.log(columns)
+        
+        let cardsList = []
+        for (let c = 0; c < columnsList.length; c++) {
+          const column = columnsList[c];
+          for(let j = 0; j < randInt(1, 6); j++) {
+            cardsList.push({
+              id: board.id + column.id + (10 * c) + j,
+              index: j,
+              title: randLorem().slice(-25),
+              description: randLorem().slice(-25),
+              comment: randLorem().slice(-25),
+              createdAt: new Date(),
+              updatedAt: new Date(),
+              user_id: user.id,
+              column_id: column.id,
+            })
+          }
+        }
+        //console.log("creating cards")
+        //console.log(cardsList)
+        let cards = await queryInterface.bulkInsert(
+          'Cards',
+          cardsList,
+          { returning: true }
+        );
+        
+        //console.log(cards)
       }
     }
-    console.log(entries);
-    await queryInterface.bulkInsert('Entries', entries, { returning: true });
+    
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('Entries', null, {});
+    await queryInterface.bulkDelete('Cards', null, {});
+    await queryInterface.bulkDelete('Columns', null, {});
+    await queryInterface.bulkDelete('Boards', null, {});
     await queryInterface.bulkDelete('Users', null, {});
   }
 };
