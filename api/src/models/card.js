@@ -19,9 +19,10 @@ export default (sequelize, DataTypes) => {
                 onDelete: 'SET NULL',
                 foreignKey: "user_id",
             })
+            models.Column.hasMany(models.Card, { foreignKey: "column_id", as: 'cards' });
         }
     };
-    Column.init({
+    Card.init({
        title: DataTypes.STRING,
        index: DataTypes.INTEGER,
        description: {

@@ -1,8 +1,8 @@
 import model from '../models';
-const { Entry } = model;
+const { Board } = model;
 
 export default async (req, res, next) => {
-    const board = await Entry.findByPk(req.params.id)
+    const board = await Board.findByPk(req.params.id)
     if(board && board.user_id == req.user._id) {
         next();
     } else {

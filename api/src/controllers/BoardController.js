@@ -1,6 +1,6 @@
 import model from '../models';
 
-const { Entry, User } = model;
+const { Board, User, Column, Card } = model;
 
 import boardService from '../services/BoardService';
 import { ValidationError } from '../utils/errors';
@@ -14,14 +14,25 @@ const boardFindOptions = {
         model: User,
         as: 'author',
         attributes: ['id', 'email', 'first_name', 'last_name']
+    }, {
+        model: Column,
+        as: 'columns',
+        attributes: ['id', 'index', 'name'],
+        order: [['index', 'ASC']],
+        include: [{
+            model: Card,
+            as: 'cards',
+            attributes: ['id', 'title', 'index', 'description', 'comment'],
+            order: [['index', 'ASC']],
+        }]
     }]
 }
 
 export default {
     async createBoard(req, res) {
         try {
-            const entry = await boardService.create({...req.body, user_id: req.user._id})
-            res.send(entry)
+            const board = await boardService.create({...req.body, user_id: req.user._id})
+            res.send(board)
         } catch (e) {
             if (e instanceof ValidationError) {
                 return res.status(403)
@@ -36,13 +47,12 @@ export default {
         }
     },
     async updateBoard(req, res) {
-        console.log(req.user)
-        const entry = await Entry.findByPk(req.params.id)
-        if (!entry) {
+        const board = await Board.findByPk(req.params.id)
+        if (!board) {
             return res.status(404).send({ message: 'Not found' });
         }
         try {
-            await boardService.update(entry, req.body)
+            await boardService.update(board, req.body)
             res.send({ message: 'Successfully updated', id: req.params.id })
         } catch (e) {
             if (e instanceof ValidationError) {
@@ -57,12 +67,12 @@ export default {
         }
     },
     async deleteBoard(req, res) {
-        const entry = await Entry.findByPk(req.params.id)
-        if (!entry) {
+        const board = await Board.findByPk(req.params.id)
+        if (!board) {
             return res.status(404).send({ message: 'Not found' });
         }
         try {
-            boardService.delete(entry)
+            boardService.delete(board)
             res.send({ message: 'Successfully deleted' })
         } catch (e) {
             console.log(e);
@@ -72,16 +82,16 @@ export default {
         }
     },
     async showBoard(req, res) {
-        const entry = await Entry.findByPk(req.params.id, boardFindOptions);
+        const board = await Board.findByPk(req.params.id, boardFindOptions);
 
-        if (!entry) {
+        if (!board) {
             return res.status(404).send({ message: 'Not found' });
         } else {
-            return res.send(entry);
+            return res.send(board);
         }
     },
     async listBoard(req, res) {
-        const allBoards = await Entry.findAll({where: {user_id: req.user._id}, order: [['date', 'DESC']], ...entryFindOptions});
+        const allBoards = await Board.findAll({where: {user_id: req.user._id}, order: [['start_date', 'DESC']], ...boardFindOptions});
         if (!allBoards) {
             return res.status(404).send({ message: 'Not found' });
         } else {
