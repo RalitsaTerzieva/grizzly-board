@@ -1,0 +1,29 @@
+@import url("https://pro.fontawesome.com/releases/v5.10.0/css/all.css");
+
+nav {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    background-color: #5f4b8bff;
+}
+
+nav > ul {
+    padding: 0;
+}
+
+.first > li {
+    display: inline-block;
+    list-style: none;
+    padding: 0 20px;
+}
+
+li a {
+    text-decoration: none;
+    color: #ffff;
+}
+
+.second > li {
+    display: inline-block;
+    list-style: none;
+    padding: 0 20px;
+}

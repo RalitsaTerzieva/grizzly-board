@@ -1,0 +1,12 @@
+div {
+    background-color: #5f4b8bff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+p {
+    color: white;
+    line-height: 2.5em;
+    padding: 0 20px;
+}
