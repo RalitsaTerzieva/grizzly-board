@@ -1,20 +1,28 @@
-
-<html>
-  <body>
-    <header>
-      <app-navbar></app-navbar>
-    </header>
-    <main>
-      <div>
-        <p>Because Agile workflow software shouldn't be complicated!</p>
-        <p>Grizzy's simple Kanban board software brings Agile methods to your team without any confusion.</p>
+<header>
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <a mat-button [routerLink]="'/home'"><h1>Grizzly Board</h1></a>
+      <span class="menu-spacer"></span>
+      <div class="nav-items">
+        <a mat-button [routerLink]="'/home'"><mat-icon aria-hidden="false" aria-label="home icon">home</mat-icon> Home </a>
+        <a mat-button [routerLink]="'/about'"><mat-icon aria-hidden="false" aria-label="about icon">pets</mat-icon> About </a>
+        <span class="spacer"></span>
+        <a mat-button [routerLink]="'/login'"><mat-icon aria-hidden="false" aria-label="login icon">account_circle</mat-icon> Login </a>
+        <a mat-button [routerLink]="'/register'"><mat-icon aria-hidden="false" aria-label="login icon">how_to_reg</mat-icon> Register </a>
       </div>
-      
-    </main>
-    <footer>
-      <app-footer></app-footer>
-    </footer>
-</body>
-  
-</html>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</header>
+<main>
+  <router-outlet></router-outlet>
+</main>
+<footer>
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Ralitsa Popova</span>
+      <span class="spacer"></span>
+      <span>© GrizzlyBoard 2022</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</footer>
 
