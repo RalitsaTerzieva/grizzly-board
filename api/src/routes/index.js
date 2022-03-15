@@ -2,6 +2,7 @@ import AuthController from '../controllers/AuthController';
 import BoardController from '../controllers/BoardController';
 import jwtAuth from '../middlewares/jwt';
 import isAuthor from '../middlewares/isAuthorMiddleware';
+import StatsController from '../controllers/StatsController';
 
 export default (app) => {
     app.post('/register', AuthController.register);
@@ -11,6 +12,7 @@ export default (app) => {
     app.get('/boards/:id', jwtAuth, isAuthor, BoardController.showBoard);
     app.delete('/boards/:id', jwtAuth, isAuthor, BoardController.deleteBoard);
     app.get('/boards', jwtAuth, BoardController.listBoard);
+    app.get('/stats', StatsController.stats);
 
     // Create a catch-all route for testing the installation.
     app.all('*', (req, res) => res.status(404).send({

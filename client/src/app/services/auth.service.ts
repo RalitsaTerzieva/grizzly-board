@@ -26,4 +26,7 @@ export class AuthService {
     
     return response
   }
+  stats(): Observable<any> {
+    return this.http.get(AUTH_API + 'stats', httpOptions);
+  }
 }
