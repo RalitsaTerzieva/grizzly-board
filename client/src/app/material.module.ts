@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
@@ -39,6 +40,7 @@ import { MatSliderModule } from '@angular/material/slider';
     MatTooltipModule,
     MatTableModule,
     MatPaginatorModule,
+    MatCardModule,
   ],
   exports: [
     MatSliderModule,
@@ -58,6 +60,7 @@ import { MatSliderModule } from '@angular/material/slider';
     MatTooltipModule,
     MatTableModule,
     MatPaginatorModule,
+    MatCardModule,
   ],
   providers: [MatDatepickerModule],
 })

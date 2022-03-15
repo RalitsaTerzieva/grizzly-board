@@ -1,1 +1,62 @@
-<p>login-page works!</p>
+
+  <mat-card>
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-content>
+    <form
+        *ngIf="!isSuccessful"
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate
+    >
+    <p>
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input
+            type="email"
+            class="form-control"
+            name="email"
+            [(ngModel)]="form.email"
+            #email="ngModel"
+            placeholder="email"
+            required
+            email
+            matInput
+        />
+        <div *ngIf="email.errors && f.submitted">
+            <mat-error *ngIf="email.errors['required']">Email is required</mat-error>
+            <mat-error *ngIf="email.errors['email']">
+              Email must be a valid email address
+            </mat-error>
+        </div>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input type="password"
+            class="form-control"
+            name="password"
+            [(ngModel)]="form.password"
+            required
+            minlength="6"
+            #password="ngModel"
+            placeholder="Password"
+            matInput
+        />
+        <div *ngIf="password.errors && f.submitted">
+            <mat-error *ngIf="password.errors['required']">Password is required</mat-error>
+            <mat-error *ngIf="password.errors['minlength']">
+              Password must be at least 6 characters
+            </mat-error>
+        </div>
+        </mat-form-field>
+    </p>
+
+    <div class="button">
+        <button type="submit" color="primary" mat-raised-button>Login</button>
+    </div>
+    </form>
+        <app-alert message="{{ errorMessage }}" type="error"  *ngIf="errorMessage && !isSuccessful"></app-alert>
+    </mat-card-content>
+</mat-card>

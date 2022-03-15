@@ -11,6 +11,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AboutPageComponent } from './components/about-page/about-page.component';
 import { RegisterPageComponent } from './components/register-page/register-page.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { authInterceptorProviders } from './helpers/auth.interceptor';
+import { AlertComponent } from './components/alert/alert.component';
+import { BoardPageComponent } from './components/board-page/board-page.component';
 
 @NgModule({
   declarations: [
@@ -20,15 +25,20 @@ import { LoginPageComponent } from './components/login-page/login-page.component
     LandingPageComponent,
     AboutPageComponent,
     RegisterPageComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    AlertComponent,
+    BoardPageComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

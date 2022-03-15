@@ -1,1 +1,118 @@
-<p>register-page works!</p>
+
+  <mat-card>
+    <mat-card-title>Register</mat-card-title>
+    <mat-card-content>
+    <form
+        *ngIf="!isSuccessful"
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate
+    >
+    <p>
+        <mat-form-field>
+            <mat-label>First Name</mat-label>
+            <input
+            type="text"
+            class="form-control"
+            name="first_name"
+            [(ngModel)]="form.first_name"
+            required
+            minlength="3"
+            maxlength="20"
+            #first_name="ngModel"
+            placeholder="First Name"
+            matInput
+        />
+        <div *ngIf="first_name.errors && f.submitted">
+            <mat-error *ngIf="first_name.errors['required']">First name is required</mat-error>
+            <mat-error *ngIf="first_name.errors['minlength']">
+            First name must be at least 3 characters
+            </mat-error>
+            <mat-error *ngIf="first_name.errors['maxlength']">
+            First name must be at most 20 characters
+            </mat-error>
+        </div>
+        </mat-form-field>
+    </p>
+
+    <p>
+        <mat-form-field>
+            <mat-label>Last Name</mat-label>
+            <input
+            type="text"
+            class="form-control"
+            name="last_name"
+            [(ngModel)]="form.last_name"
+            required
+            minlength="3"
+            maxlength="20"
+            #last_name="ngModel"
+            placeholder="Last Name"
+            matInput
+        />
+        <div *ngIf="last_name.errors && f.submitted">
+            <mat-error *ngIf="last_name.errors['required']">Last Name is required</mat-error>
+            <mat-error *ngIf="last_name.errors['minlength']">
+            Last Name must be at least 3 characters
+            </mat-error>
+            <mat-error *ngIf="last_name.errors['maxlength']">
+            Last Name must be at most 20 characters
+            </mat-error>
+        </div>
+        </mat-form-field>
+    </p>
+
+    <p>
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input type="password"
+            class="form-control"
+            name="password"
+            [(ngModel)]="form.password"
+            required
+            minlength="6"
+            #password="ngModel"
+            placeholder="Password"
+            matInput
+        />
+        <div *ngIf="password.errors && f.submitted">
+            <mat-error *ngIf="password.errors['required']">Password is required</mat-error>
+            <mat-error *ngIf="password.errors['minlength']">
+              Password must be at least 6 characters
+            </mat-error>
+        </div>
+        </mat-form-field>
+    </p>
+
+    <p>
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input
+            type="email"
+            class="form-control"
+            name="email"
+            [(ngModel)]="form.email"
+            #email="ngModel"
+            placeholder="email"
+            required
+            email
+            matInput
+        />
+        <div *ngIf="email.errors && f.submitted">
+            <mat-error *ngIf="email.errors['required']">Email is required</mat-error>
+            <mat-error *ngIf="email.errors['email']">
+              Email must be a valid email address
+            </mat-error>
+        </div>
+        </mat-form-field>
+    </p>
+
+    <div class="button">
+        <button type="submit" color="primary" mat-raised-button>Register</button>
+    </div>
+    </form>
+        <app-alert message="Your registration is successful!" type="success"  *ngIf="isSuccessful"></app-alert>
+        <app-alert message="{{ errorMessage }}" type="error"  *ngIf="errorMessage && !isSuccessful"></app-alert>
+    </mat-card-content>
+</mat-card>

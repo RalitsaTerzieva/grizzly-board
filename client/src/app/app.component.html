@@ -1,14 +1,21 @@
 <header>
   <mat-toolbar color="primary">
     <mat-toolbar-row>
-      <a mat-button [routerLink]="'/home'"><h1>Grizzly Board</h1></a>
+      <a mat-button [routerLink]="loggedIn ? '/board' : '/home'"><h1>Grizzly Board</h1></a>
       <span class="menu-spacer"></span>
       <div class="nav-items">
-        <a mat-button [routerLink]="'/home'"><mat-icon aria-hidden="false" aria-label="home icon">home</mat-icon> Home </a>
-        <a mat-button [routerLink]="'/about'"><mat-icon aria-hidden="false" aria-label="about icon">pets</mat-icon> About </a>
+        <a mat-button [routerLink]="loggedIn ? '/board' : '/home'"><mat-icon aria-hidden="false" aria-label="home icon">home</mat-icon> Home </a>
+        
         <span class="spacer"></span>
-        <a mat-button [routerLink]="'/login'"><mat-icon aria-hidden="false" aria-label="login icon">account_circle</mat-icon> Login </a>
-        <a mat-button [routerLink]="'/register'"><mat-icon aria-hidden="false" aria-label="login icon">how_to_reg</mat-icon> Register </a>
+        <span *ngIf="!loggedIn">
+          <a mat-button [routerLink]="'/about'"><mat-icon aria-hidden="false" aria-label="about icon">pets</mat-icon> About </a>
+          <a mat-button [routerLink]="'/login'"><mat-icon aria-hidden="false" aria-label="login icon">person</mat-icon> Login </a>
+          <a mat-button [routerLink]="'/register'"><mat-icon aria-hidden="false" aria-label="register icon">how_to_reg</mat-icon> Register </a>
+        </span>
+        <span *ngIf="loggedIn">
+          <a mat-button [routerLink]="'/board'"><mat-icon aria-hidden="false" aria-label="profile icon">account_circle</mat-icon> Welcome, {{ user }} </a>
+          <a mat-button href (click)="logout()"><mat-icon aria-hidden="false" aria-label="logout icon">logout</mat-icon> Logout </a>
+        </span>
       </div>
     </mat-toolbar-row>
   </mat-toolbar>
