@@ -26,11 +26,18 @@
     align-items:center;
 }
 
-.col-title button *, .col-title .mat-icon-button{
+.col-title button *, .col-title .mat-icon-button {
     width: 25px;
     height: 25px;
     line-height: 24px;
     font-size: 20px;
+}
+
+.card-title button *, .card-title .mat-icon-button{
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  font-size: 14px;
 }
 
 .col-title .mat-badge-above .mat-badge-content {
@@ -51,6 +58,18 @@
     padding: 0.5em;
     -webkit-box-shadow: 0px 0px 6px -2px rgba(0,0,0,0.5); 
     box-shadow: 0px 0px 6px -2px rgba(0,0,0,0.5);
+}
+
+.card-title {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.card-title h5 {
+  margin: 0;
+  font-size: 1em;
+  font-weight: 500;
 }
 
 

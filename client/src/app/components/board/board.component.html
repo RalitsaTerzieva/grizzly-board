@@ -3,7 +3,7 @@
         <div class="col-title">
             <span [matBadge]="col.cards.length" matBadgeOverlap="false" matBadgeSize="small" matBadgeColor="accent">{{ col.name }}</span>
             <span class="spacer"></span>
-            <button mat-icon-button aria-label="add">
+            <button mat-icon-button aria-label="add" (click)="addCard(col)">
                 <mat-icon>add</mat-icon>
             </button>
             <button mat-icon-button aria-label="actions">
@@ -12,7 +12,15 @@
         </div>
         <div class="card" *ngFor="let card of col?.cards" cdkDrag [cdkDragData]="card" (cdkDragStarted)="dragStart($event)">
             <div class="drag-placeholder" *cdkDragPlaceholder></div>
-            {{ card.title }}
+            <div class="card-title">
+                <h5>{{ card.title }}</h5>
+                <div class="spacer"></div>
+                <button mat-icon-button aria-label="edit" (click)="editCard(card)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </div>
+            <div>{{ card.description }}</div>
+            
         </div>
     </div>
 </div>

@@ -19,6 +19,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -41,6 +43,7 @@ import { MatSliderModule } from '@angular/material/slider';
     MatTableModule,
     MatPaginatorModule,
     MatCardModule,
+    MatDialogModule
   ],
   exports: [
     MatSliderModule,

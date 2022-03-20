@@ -2,6 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Board } from 'src/app/shared/models/board.model';
 import {CdkDragDrop, CdkDragStart, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { Card } from 'src/app/shared/models/card.model';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { AddStoryModalComponent } from '../add-story-modal/add-story-modal.component';
+import { Column } from 'src/app/shared/models/column.model';
 
 @Component({
   selector: 'app-board',
@@ -12,7 +15,7 @@ export class BoardComponent implements OnInit {
   @Input() board!: Board | null;
   bodyElement: HTMLElement = document.body;
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -36,5 +39,46 @@ export class BoardComponent implements OnInit {
         event.currentIndex,
       );
     }
+    event.item.data.index = event.currentIndex;
+  }
+
+  addCard(column: Column) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "40vw";
+    dialogConfig.data = {};
+
+    const dialogRef = this.dialog.open(AddStoryModalComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+        card => {
+          if (!card) { return }
+          console.log("Dialog output:", card)
+          column.cards.push(card)
+          column.cards = column.cards.map((card, index) => {
+            card.index = index;
+            return card;
+          })
+        }
+    );
+  }
+
+  editCard(card: Card) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "40vw";
+    dialogConfig.data = card;
+
+    const dialogRef = this.dialog.open(AddStoryModalComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+        card => {
+          console.log(card)
+        }
+    );
   }
 }

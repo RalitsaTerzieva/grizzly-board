@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Add Card</h2>
+<div mat-dialog-content [formGroup]="form">
+    <mat-form-field>
+        <input matInput placeholder="Title" formControlName="title">
+        <mat-error *ngIf="form.get('title')?.hasError('required')">
+            This field is required
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Description" formControlName="description" />
+        <mat-error *ngIf="form.get('description')?.hasError('required')">
+            This field is required
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <textarea matInput placeholder="Comment" formControlName="comment"></textarea>
+    </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button (click)="close()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="save()" [disabled]="!form.valid">Save</button>
+</div>

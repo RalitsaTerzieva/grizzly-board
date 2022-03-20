@@ -18,6 +18,7 @@ import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { AlertComponent } from './components/alert/alert.component';
 import { BoardPageComponent } from './components/board-page/board-page.component';
 import { BoardComponent } from './components/board/board.component';
+import { AddStoryModalComponent } from './components/add-story-modal/add-story-modal.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { BoardComponent } from './components/board/board.component';
     LoginPageComponent,
     AlertComponent,
     BoardPageComponent,
-    BoardComponent
+    BoardComponent,
+    AddStoryModalComponent
   ],
   imports: [
     BrowserModule,
