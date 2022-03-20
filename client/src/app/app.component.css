@@ -30,9 +30,6 @@ p {
     flex-grow: 1;
     margin-left: 10px;
 }
-.spacer {
-    flex: 1 1 auto;
-}
 
 mat-toolbar {
     min-height: 50px !important; height: 50px !important;
@@ -40,4 +37,8 @@ mat-toolbar {
 
 footer *{
     font-size: 1em !important;
+}
+
+.mat-toolbar.mat-primary {
+    background-color: #5f4B8BFF;
 }

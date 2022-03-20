@@ -3,6 +3,11 @@ import { AuthService } from 'src/app/services/auth.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import {Router} from '@angular/router';
 
+interface LoginFormData {
+  email: string;
+  password: string;
+}
+
 const parseJwt = (token: string) => {
   try {
     return atob(token.split('.')[1]);
@@ -17,13 +22,14 @@ const parseJwt = (token: string) => {
 })
 export class LoginPageComponent implements OnInit {
 
-  form: any = {
-    email: null,
-    password: null,
+  form: LoginFormData = {
+    email: "",
+    password: "",
   };
-  isSuccessful = false;
-  isLoginFailed = false;
-  errorMessage = '';
+  isSuccessful: boolean = false;
+  isLoginFailed: boolean = false;
+  errorMessage: string = '';
+
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) { }
 
   ngOnInit(): void {

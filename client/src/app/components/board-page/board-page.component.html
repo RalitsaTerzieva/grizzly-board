@@ -1,1 +1,14 @@
-<p>board-page works!</p>
+<mat-card>
+    <mat-card-content>
+        <mat-list-item class="primary-imenu-item" role="listitem">
+            <mat-form-field class="select-form">
+                <mat-select placeholder="Board" name="board" class="filter-select" [(ngModel)]="selectedBoard" (selectionChange)="boardChange()" [compareWith]="compareBoards">
+                    <mat-option *ngFor="let b of boards" [value]="b">
+                        {{b.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-list-item>
+    </mat-card-content>
+    <app-board [board]="selectedBoard"></app-board>
+</mat-card>

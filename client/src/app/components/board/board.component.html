@@ -1,0 +1,18 @@
+<div class="board" cdkDropListGroup>
+    <div class="column" *ngFor="let col of board?.columns" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="col.cards">
+        <div class="col-title">
+            <span [matBadge]="col.cards.length" matBadgeOverlap="false" matBadgeSize="small" matBadgeColor="accent">{{ col.name }}</span>
+            <span class="spacer"></span>
+            <button mat-icon-button aria-label="add">
+                <mat-icon>add</mat-icon>
+            </button>
+            <button mat-icon-button aria-label="actions">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+        </div>
+        <div class="card" *ngFor="let card of col?.cards" cdkDrag [cdkDragData]="card" (cdkDragStarted)="dragStart($event)">
+            <div class="drag-placeholder" *cdkDragPlaceholder></div>
+            {{ card.title }}
+        </div>
+    </div>
+</div>

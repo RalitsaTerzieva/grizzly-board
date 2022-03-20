@@ -29,4 +29,7 @@ export class AuthService {
   stats(): Observable<any> {
     return this.http.get(AUTH_API + 'stats', httpOptions);
   }
+  boards(): Observable<any> {
+    return this.http.get(AUTH_API + 'boards', httpOptions);
+  }
 }
