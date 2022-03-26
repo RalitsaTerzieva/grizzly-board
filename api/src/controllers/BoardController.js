@@ -18,14 +18,17 @@ const boardFindOptions = {
         model: Column,
         as: 'columns',
         attributes: ['id', 'index', 'name'],
-        order: [['index', 'ASC']],
         include: [{
             model: Card,
             as: 'cards',
             attributes: ['id', 'title', 'index', 'description', 'comment'],
-            order: [['index', 'ASC']],
-        }]
-    }]
+        }],
+    }],
+    order: [
+        ['columns', 'index', 'asc'],
+        ['columns', 'cards', 'index', 'asc'],
+        ['id', 'asc']
+    ],
 }
 
 export default {

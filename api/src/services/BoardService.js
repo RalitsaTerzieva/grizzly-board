@@ -1,5 +1,5 @@
 import model from '../models';
-const { Board } = model;
+const { Board, Card } = model;
 import { ValidationError } from '../utils/errors';
 
 export default {
@@ -9,9 +9,20 @@ export default {
         return board
     },
     async update(board, data) {
-        this.validate(data);
         board.set(data);
         await board.save();
+
+        for(let column of data.columns) {
+            for (let [idx, card] of column.cards.entries()) {
+                if (card.id) {
+                    let cardObj = await Card.findByPk(card.id);
+                    cardObj.set({...card, column_id: column.id, user_id: board.user_id, index: idx})
+                    await cardObj.save();
+                } else {
+                    await Card.create({...card, column_id: column.id, user_id: board.user_id, index: idx});
+                }
+            }
+        }
     },
     async delete(board) {
         board.destroy()

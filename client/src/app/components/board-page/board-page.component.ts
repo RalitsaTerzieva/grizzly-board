@@ -29,6 +29,19 @@ export class BoardPageComponent implements OnInit {
   }
   compareBoards(b1: Board, b2: Board) {
     return b1 && b2 && b1.id == b2.id;
-}
+  }
+
+  public onBoardDataChanged(board: Board | null): void {
+    if(!!board) {
+      console.log(board);
+      this.api.updateBoard(board.id, board).subscribe(
+        res => {
+        },
+        err => {
+          throw err
+        }
+      );;
+    } 
+  }
 
 }

@@ -32,4 +32,7 @@ export class AuthService {
   boards(): Observable<any> {
     return this.http.get(AUTH_API + 'boards', httpOptions);
   }
+  updateBoard(id: number, data: object): Observable<any> {
+    return this.http.put(AUTH_API + `boards/${id}`, data, httpOptions);
+  }
 }

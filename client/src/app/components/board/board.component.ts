@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Board } from 'src/app/shared/models/board.model';
 import {CdkDragDrop, CdkDragStart, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { Card } from 'src/app/shared/models/card.model';
@@ -12,6 +12,8 @@ import { Column } from 'src/app/shared/models/column.model';
   styleUrls: ['./board.component.css']
 })
 export class BoardComponent implements OnInit {
+  @Output()
+  public boardChanged = new EventEmitter<Board | null>();
   @Input() board!: Board | null;
   bodyElement: HTMLElement = document.body;
 
@@ -40,6 +42,7 @@ export class BoardComponent implements OnInit {
       );
     }
     event.item.data.index = event.currentIndex;
+    this.boardChanged.emit(this.board);
   }
 
   addCard(column: Column) {
@@ -61,6 +64,7 @@ export class BoardComponent implements OnInit {
             card.index = index;
             return card;
           })
+          this.boardChanged.emit(this.board);
         }
     );
   }
@@ -77,7 +81,7 @@ export class BoardComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
         card => {
-          console.log(card)
+          this.boardChanged.emit(this.board);
         }
     );
   }
