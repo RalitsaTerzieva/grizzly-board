@@ -20,6 +20,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatMenu, MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
     MatTableModule,
     MatPaginatorModule,
     MatCardModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule,
   ],
   exports: [
     MatSliderModule,
@@ -64,6 +66,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
     MatTableModule,
     MatPaginatorModule,
     MatCardModule,
+    MatMenuModule,
   ],
   providers: [MatDatepickerModule],
 })
