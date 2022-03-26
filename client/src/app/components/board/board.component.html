@@ -22,5 +22,8 @@
             <div>{{ card.description }}</div>
             
         </div>
+        <div class="empty" *ngIf="col.cards.length === 0">
+            &bull;&bull;&bull;
+        </div>
     </div>
 </div>
