@@ -19,7 +19,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSliderModule } from '@angular/material/slider';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenu, MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
@@ -66,6 +66,7 @@ import { MatMenu, MatMenuModule} from '@angular/material/menu';
     MatTableModule,
     MatPaginatorModule,
     MatCardModule,
+    MatDialogModule,
     MatMenuModule,
   ],
   providers: [MatDatepickerModule],

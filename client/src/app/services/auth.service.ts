@@ -35,4 +35,7 @@ export class AuthService {
   updateBoard(id: number, data: object): Observable<any> {
     return this.http.put(AUTH_API + `boards/${id}`, data, httpOptions);
   }
+  deleteCard(id: number | undefined): Observable<any> {
+    return this.http.delete(AUTH_API + `cards/${id}`, httpOptions);
+  }
 }

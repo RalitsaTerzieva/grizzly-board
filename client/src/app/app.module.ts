@@ -19,6 +19,16 @@ import { AlertComponent } from './components/alert/alert.component';
 import { BoardPageComponent } from './components/board-page/board-page.component';
 import { BoardComponent } from './components/board/board.component';
 import { AddStoryModalComponent } from './components/add-story-modal/add-story-modal.component';
+import {MaterialConfirmModule, MaterialConfirmConfig} from '@kovalenko/material-confirm';
+
+const materialConfirmConfig: MaterialConfirmConfig = {
+  ok: 'Ok',
+  cancel: 'Cancel',
+  position: {
+    top: '10px'
+  },
+  width: '400px'
+};
 
 @NgModule({
   declarations: [
@@ -42,7 +52,8 @@ import { AddStoryModalComponent } from './components/add-story-modal/add-story-m
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    DragDropModule
+    DragDropModule,
+    MaterialConfirmModule.config(materialConfirmConfig),
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent],

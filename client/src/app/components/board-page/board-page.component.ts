@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Board } from 'src/app/shared/models/board.model';
+import { Card } from 'src/app/shared/models/card.model';
 
 @Component({
   selector: 'app-board-page',
@@ -17,7 +18,7 @@ export class BoardPageComponent implements OnInit {
     this.api.boards().subscribe(
       boards => {
         this.boards = boards.map((board: Board) => new Board().deserialize(board))
-        this.selectedBoard = boards[0]
+        this.selectedBoard = this.boards[0]
       },
       err => {
         throw err
@@ -25,7 +26,6 @@ export class BoardPageComponent implements OnInit {
     );
   }
   boardChange() {
-    console.dir(this.selectedBoard)
   }
   compareBoards(b1: Board, b2: Board) {
     return b1 && b2 && b1.id == b2.id;
@@ -33,9 +33,11 @@ export class BoardPageComponent implements OnInit {
 
   public onBoardDataChanged(board: Board | null): void {
     if(!!board) {
-      console.log(board);
       this.api.updateBoard(board.id, board).subscribe(
         res => {
+          if (!!res.board) {
+            this.selectedBoard?.deserialize(res.board)
+          }
         },
         err => {
           throw err
@@ -44,4 +46,13 @@ export class BoardPageComponent implements OnInit {
     } 
   }
 
+  public onCardDeleted(card: Card): void {
+      this.api.deleteCard(card.id).subscribe(
+        res => {
+        },
+        err => {
+          throw err
+        }
+      );
+    }
 }

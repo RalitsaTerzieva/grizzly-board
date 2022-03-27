@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Board } from 'src/app/shared/models/board.model';
 import {CdkDragDrop, CdkDragStart, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { Card } from 'src/app/shared/models/card.model';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddStoryModalComponent } from '../add-story-modal/add-story-modal.component';
 import { Column } from 'src/app/shared/models/column.model';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'app-board',
@@ -14,8 +15,12 @@ import { Column } from 'src/app/shared/models/column.model';
 export class BoardComponent implements OnInit {
   @Output()
   public boardChanged = new EventEmitter<Board | null>();
+  @Output()
+  public cardDeleted = new EventEmitter<Card>();
   @Input() board!: Board | null;
   bodyElement: HTMLElement = document.body;
+  @ViewChild('menuTrigger') cardMenu!: MatMenuTrigger;
+  
 
   constructor(private dialog: MatDialog) { }
 
@@ -84,5 +89,9 @@ export class BoardComponent implements OnInit {
           this.boardChanged.emit(this.board);
         }
     );
+  }
+  deleteCard(column: Column, card: Card) {
+    column.deleteCard(card);
+    this.cardDeleted.emit(card);
   }
 }

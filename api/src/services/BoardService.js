@@ -27,6 +27,9 @@ export default {
     async delete(board) {
         board.destroy()
     },
+    async deleteCard(card) {
+        card.destroy()
+    },
     validate(data) {
         if (!!!data.name) {
             throw new ValidationError("Please enter a valid name");

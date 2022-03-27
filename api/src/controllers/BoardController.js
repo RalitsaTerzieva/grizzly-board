@@ -50,13 +50,14 @@ export default {
         }
     },
     async updateBoard(req, res) {
-        const board = await Board.findByPk(req.params.id)
+        let board = await Board.findByPk(req.params.id)
         if (!board) {
             return res.status(404).send({ message: 'Not found' });
         }
         try {
             await boardService.update(board, req.body)
-            res.send({ message: 'Successfully updated', id: req.params.id })
+            board = await Board.findByPk(req.params.id, boardFindOptions)
+            res.send({ message: 'Successfully updated', id: req.params.id, board: board })
         } catch (e) {
             if (e instanceof ValidationError) {
                 return res.status(403)
@@ -99,6 +100,21 @@ export default {
             return res.status(404).send({ message: 'Not found' });
         } else {
             return res.send(allBoards);
+        }
+    },
+    async deleteCard(req, res) {
+        const card = await Card.findByPk(req.params.id)
+        if (!card) {
+            return res.status(404).send({ message: 'Not found' });
+        }
+        try {
+            boardService.deleteCard(card)
+            res.send({ message: 'Successfully deleted' })
+        } catch (e) {
+            console.log(e);
+            return res.status(500)
+                .send(
+                    { message: 'Could not perform operation at this time, kindly try again later.' });
         }
     },
 }

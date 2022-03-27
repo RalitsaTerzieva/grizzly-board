@@ -29,9 +29,19 @@
             <div class="card-title">
                 <h5>{{ card.title }}</h5>
                 <div class="spacer"></div>
-                <button mat-icon-button aria-label="edit" (click)="editCard(card)">
-                    <mat-icon>edit</mat-icon>
+                <button mat-icon-button aria-label="actions" [matMenuTriggerFor]="cardMenu" #menuTrigger="matMenuTrigger">
+                    <mat-icon>more_vert</mat-icon>
                 </button>
+                <mat-menu #cardMenu="matMenu">
+                    <button mat-menu-item aria-label="edit" (click)="editCard(card); menuTrigger.closeMenu()">
+                      <mat-icon>edit</mat-icon>
+                      <span>Edit</span>
+                    </button>
+                    <button mat-menu-item (click)="menuTrigger.closeMenu()" (confirm)="deleteCard(col, card)" [confirmMessage]="'Are you sure you want to delete this card?'" [confirmOk]="'Delete'">
+                        <mat-icon>delete</mat-icon>
+                        <span>Delete</span>
+                      </button>
+                  </mat-menu>
             </div>
             <div>{{ card.description }}</div>
             

@@ -15,4 +15,10 @@ export class Column implements Deserializable {
         this.cards = input.cards.map((c: any) => new Card().deserialize(c));
         return this;
     }
+    deleteCard(card: Card) {
+        var index = this.cards.indexOf(card);
+        if (index !== -1) {
+            this.cards.splice(index, 1);
+        }
+    }
 }

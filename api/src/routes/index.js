@@ -12,6 +12,7 @@ export default (app) => {
     app.get('/boards/:id', jwtAuth, isAuthor, BoardController.showBoard);
     app.delete('/boards/:id', jwtAuth, isAuthor, BoardController.deleteBoard);
     app.get('/boards', jwtAuth, BoardController.listBoard);
+    app.delete('/cards/:id', jwtAuth, BoardController.deleteCard);
     app.get('/stats', StatsController.stats);
 
     // Create a catch-all route for testing the installation.
