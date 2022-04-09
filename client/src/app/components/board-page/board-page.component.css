@@ -1,6 +1,6 @@
 mat-card {
     display: flex;
     flex-direction: column;
-    margin: 2em;
+    margin: 5em;
     align-items: left;
 }
