@@ -5,9 +5,14 @@ mat-form-field {
 mat-card {
     display: flex;
     flex-direction: column;
-    margin: 2em;
+    margin: 6em;
     align-items: center;
 }
+
+.button button {
+    background-color: #603f83ff !important;
+}
+
 
 div.button {
     text-align: center;
