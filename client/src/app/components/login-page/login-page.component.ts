@@ -43,8 +43,8 @@ export class LoginPageComponent implements OnInit {
         this.tokenStorage.saveUser(parseJwt(data.token))
         this.isSuccessful = true;
         this.isLoginFailed = false;
-        this.router.navigate(['/board'])
-        window.location.href = '/board'
+        this.router.navigate(['/profile'])
+        window.location.href = '/profile'
       },
       err => {
         this.errorMessage = err.error.message;
