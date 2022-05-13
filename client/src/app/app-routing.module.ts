@@ -5,6 +5,7 @@ import { BoardPageComponent } from './components/board-page/board-page.component
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { RegisterPageComponent } from './components/register-page/register-page.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'about', component: AboutPageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'register', component: RegisterPageComponent },
+  { path: 'profile', component: ProfileComponent },
 ];
 
 @NgModule({
