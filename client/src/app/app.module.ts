@@ -20,6 +20,7 @@ import { BoardPageComponent } from './components/board-page/board-page.component
 import { BoardComponent } from './components/board/board.component';
 import { AddStoryModalComponent } from './components/add-story-modal/add-story-modal.component';
 import {MaterialConfirmModule, MaterialConfirmConfig} from '@kovalenko/material-confirm';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const materialConfirmConfig: MaterialConfirmConfig = {
   ok: 'Ok',
@@ -42,7 +43,8 @@ const materialConfirmConfig: MaterialConfirmConfig = {
     AlertComponent,
     BoardPageComponent,
     BoardComponent,
-    AddStoryModalComponent
+    AddStoryModalComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
